@@ -12,7 +12,7 @@ import cats from './cats';
 import * as profile from './profile';
 // 给默认导出的函数命名
 import customName from './export-default';
-import Point from './class';
+import { Point } from './class';
 
 $('<h1>Cats</h1>').appendTo('body');
 const ul = $('<ul></ul>').appendTo('body');
@@ -20,12 +20,19 @@ for(const cat of cats) {
 	$('<li></li>').text(cat).appendTo(ul);
 }
 
-let point = new Point(5, 5);
-console.log(point.toString());
-
 //customName();
 //console.log(profile.firstName + ', ' + profile.lastName + ', ' + profile.year);
 //console.log(profile.foo);
 
+let point1 = new Point(5, 5);
+let point2 = new Point(2, 3);
+console.log(point1.__proto__ == point2.__proto__);
 
+// 从原型上给类添加方法point1.__proto__.printName = () => 'Oops';
+point1.__proto__.printName = () => 'Oops';
+console.log(point1.printName());
+console.log(point2.printName());
+
+let point3 = new Point(4, 2);
+console.log(point3.printName());
 
